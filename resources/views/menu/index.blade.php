@@ -36,7 +36,7 @@
                                 </button>
                             </article>
                         </div>
-                        <div class="col-md-8 col-md-offset-2" style="width: 1000px">
+                        <div class="col-md-8 col-md-offset-2" style="width: 1200px">
                             <div class="panel-group" id="menu-accordion" data-sortable="true">
                                 @foreach($menus as $key => $menu)
                                     <div class="card panel {{ session('collapse_in') == $menu->slug ? 'expanded' : '' }}"
@@ -54,7 +54,7 @@
                                                         data-loading-text="<i class='fa fa-spinner fa-spin'></i>">
                                                     <i class="fas fa-plus"></i>
                                                 </button>
-                                                <a href="{{route('menu.edit',$menu->id)}}" class="btn btn-delete" title="edit">
+                                                <a href="{{route('menu.edit',$menu->id)}}" class="btn btn-icon-toggle btn-s" title="edit">
                                                     <i class="mdi mdi-pencil"></i>
                                                 </a>
                                                 @unless($menu->is_primary)
@@ -97,7 +97,7 @@
                                                                             data-loading-text="<i class='fa fa-spinner fa-spin'></i>">
                                                                         <i class="fas fa-plus"></i>
                                                                     </button>
-                                                                    <a href="{{route('menu.subMenu.edit', [$menu->id,$subMenu->id])}}" class="btn btn-flat btn-primary btn-xs" title="edit">
+                                                                    <a href="{{route('menu.subMenu.edit', [$menu->id,$subMenu->id])}}" class="btn btn-icon-toggle btn-s" title="edit">
                                                                         <i class="mdi mdi-pencil"></i>
                                                                     </a>
                                                                     @unless($subMenu->is_primary)
@@ -128,9 +128,8 @@
                                                                                      data-target="#childsubmenu-accordion-{{ $childSubKey }}">
                                                                                     <header>{{ $childsubMenu->name }}</header>
                                                                                     <div class="tools">
-                                                                                        <a href="{{ route('menu.subMenu.childsubMenu.edit', [$menu->id, $subMenu->id, $childsubMenu->id]) }}" class="btn btn-flat btn-primary btn-xs" title="edit">
-                                                    <i class="mdi mdi-pencil"></i>
-
+                                                                                        <a href="{{ route('menu.subMenu.childsubMenu.edit', [$menu->id, $subMenu->id, $childsubMenu->id]) }}" class="btn btn-icon-toggle btn-s" title="edit">
+                                                                                            <i class="mdi mdi-pencil"></i>
                                                                                         </a>
                                                                                         @unless($childsubMenu->is_primary)
                                                                                             <a class="btn btn-icon-toggle btn-delete" style="color: #f44336;"

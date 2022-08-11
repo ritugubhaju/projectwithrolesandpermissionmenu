@@ -3,53 +3,60 @@
 @section('title', 'Menu')
 
 @section('content')
-<section>
+    <section>
         <div class="section-body">
-            <form class="form form-validate floating-label" action="{{route('menu.update-menu',$menu->id)}}"
-                  method="POST" enctype="multipart/form-data" novalidate>
-            @method('PUT')
-            @csrf
-            <div class="row">
-                <div class="card-header" style="background-color: white;">
-                    <header>Edit Menu <span class="text text-danger font-weight-bolder">({{$menu->name}})</span></header>
-                </div>
-            </div>
+            <form class="form form-validate floating-label" action="{{ route('menu.update-menu', $menu->id) }}" method="POST"
+                enctype="multipart/form-data" novalidate>
+                @method('PUT')
+                @csrf
                 <div class="row">
-                    <div class="card-body" style="background-color: white;">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <input type="text" name="name" class="form-control" required
-                                        value="{{ old('name', isset($menu->name) ? $menu->name : '') }}"/>
-
-                                    <label for="Name">Name</label>
+                    <div class="col-sm-9">
+                        <div class="card">
+                            <div class="card-underline">
+                                <div class="card-head m-2">
+                                    <header>Edit Menu <span
+                                            class="text text-danger font-weight-bolder">({{ $menu->name }})</span>
+                                    </header>
                                 </div>
                             </div>
-                        </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="Name">Name</label>
+                                            <input type="text" name="name" class="form-control" required
+                                                value="{{ old('name', isset($menu->name) ? $menu->name : '') }}" />
 
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <input type="number" name="order" class="form-control" required
-                                        value="{{ old('order', isset($menu->order) ? $menu->order : '') }}"/>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                    <label for="order">Order</label>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="order">Order</label>
+                                            <input type="number" name="order" class="form-control" required
+                                                value="{{ old('order', isset($menu->order) ? $menu->order : '') }}" />
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card-actionbar-row">
+                                    <a class="btn btn-default btn-ink" href="{{ route('menu.index') }}">
+                                        <i class="md md-arrow-back"></i>
+                                        Back
+                                    </a>
+                                    <input type="submit" name="pageSubmit" class="btn btn-info ink-reaction"
+                                        value="Save">
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="card-actionbar-row">
-                            <a class="btn btn-default btn-ink" href="{{ route('menu.index') }}">
-                                <i class="md md-arrow-back"></i>
-                                Back
-                            </a>
-                            <input type="submit" name="pageSubmit" class="btn btn-info ink-reaction" value="Save">
                         </div>
                     </div>
                 </div>
             </form>
         </div>
-</section>
+    </section>
 @stop
 
 @section('page-specific-styles')
