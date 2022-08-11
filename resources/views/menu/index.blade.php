@@ -2,14 +2,15 @@
 
 @section('title', 'Menu')
 
-@push('styles')
+@section('page-specific-styles')
 
+    <link rel="stylesheet" href="{{ asset('css/materialadmin.css') }}"/>
     <style>
         #menu-accordion .card-head {
             cursor: pointer;
         }
     </style>
-@endpush
+@endsection
 
 @section('content')
 
@@ -26,16 +27,16 @@
                             <article class="margin-bottom-xxl">
                                 <button class="btn btn-primary ink-reaction" data-toggle="modal" data-target="#addMenu"
                                         type="button">
-                                    <i class="md md-add"></i>
+                                    <i class="fas fa-plus"></i>
                                     Add
                                 </button>
                                 <button class="btn btn-primary ink-reaction" type="submit">
-                                    <i class="md md-save"></i>
+                                    <i class="fas fa-save"></i>
                                     Save
                                 </button>
                             </article>
                         </div>
-                        <div class="col-md-8 col-md-offset-2">
+                        <div class="col-md-8 col-md-offset-2" style="width: 1000px">
                             <div class="panel-group" id="menu-accordion" data-sortable="true">
                                 @foreach($menus as $key => $menu)
                                     <div class="card panel {{ session('collapse_in') == $menu->slug ? 'expanded' : '' }}"
@@ -47,20 +48,19 @@
                                              data-target="#menu-accordion-{{ $key }}">
                                             <header>{{ $menu->name }}</header>
                                             <div class="tools">
-                                                <button type="button" class="btn btn-icon-toggle btn-add-sub-menu"
+                                                <button type="button" class="btn btn-add-sub-menu"
                                                         data-url="{{ route('menu.subMenu.component.modal', $menu->id) }}"
-                                                        data-toggle="tooltip" data-placement="top"
                                                         data-original-title="Add Sub Menu"
                                                         data-loading-text="<i class='fa fa-spinner fa-spin'></i>">
-                                                    <i class="md md-add"></i>
+                                                    <i class="fas fa-plus"></i>
                                                 </button>
-                                                <a href="{{route('menu.edit',$menu->id)}}" class="btn btn-flat btn-primary btn-xs" title="edit">
-                                                    <i class="glyphicon glyphicon-edit"></i>
+                                                <a href="{{route('menu.edit',$menu->id)}}" class="btn btn-delete" title="edit">
+                                                    <i class="mdi mdi-pencil"></i>
                                                 </a>
                                                 @unless($menu->is_primary)
                                                     <a class="btn btn-icon-toggle btn-delete" style="color: #f44336;"
                                                        data-url="{{ route('menu.destroy', $menu->id) }}">
-                                                        <i class="md md-delete"></i>
+                                                        <i class="far fa-trash-alt"></i>
                                                     </a>
                                                     {{-- <a href="{{ route('menu.destroy', $menu->id) }}">
                                                         <button type="button"
@@ -95,15 +95,15 @@
                                                                             data-placement="top"
                                                                             data-original-title="Add Child Sub Menu"
                                                                             data-loading-text="<i class='fa fa-spinner fa-spin'></i>">
-                                                                        <i class="md md-add"></i>
+                                                                        <i class="fas fa-plus"></i>
                                                                     </button>
                                                                     <a href="{{route('menu.subMenu.edit', [$menu->id,$subMenu->id])}}" class="btn btn-flat btn-primary btn-xs" title="edit">
-                                                                        <i class="glyphicon glyphicon-edit"></i>
+                                                                        <i class="mdi mdi-pencil"></i>
                                                                     </a>
                                                                     @unless($subMenu->is_primary)
                                                                         <a class="btn btn-icon-toggle btn-delete" style="color: #f44336;"
                                                                            data-url="{{ route('menu.subMenu.destroy', [$menu->id, $subMenu->id]) }}">
-                                                                            <i class="md md-delete"></i>
+                                                                            <i class="far fa-trash-alt"></i>
                                                                         </a>
                                                                     @endunless
                                                                     <a class="btn btn-icon-toggle"><i
@@ -129,12 +129,13 @@
                                                                                     <header>{{ $childsubMenu->name }}</header>
                                                                                     <div class="tools">
                                                                                         <a href="{{ route('menu.subMenu.childsubMenu.edit', [$menu->id, $subMenu->id, $childsubMenu->id]) }}" class="btn btn-flat btn-primary btn-xs" title="edit">
-                                                                                            <i class="glyphicon glyphicon-edit"></i>
+                                                    <i class="mdi mdi-pencil"></i>
+
                                                                                         </a>
                                                                                         @unless($childsubMenu->is_primary)
                                                                                             <a class="btn btn-icon-toggle btn-delete" style="color: #f44336;"
                                                                                                data-url="{{ route('menu.subMenu.childsubMenu.destroy', [$menu->id, $subMenu->id, $childsubMenu->id]) }}">
-                                                                                                <i class="md md-delete"></i>
+                                                                                                <i class="far fa-trash-alt"></i>
                                                                                             </a>
                                                                                         @endunless
                                                                                     </div>
@@ -167,30 +168,30 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
+                    <h4 class="modal-title" id="addMenuLabel">Add Menu</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title" id="addMenuLabel">Add Menu</h4>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
 {{--                        {{ Form::select('page', $pages, null, ['class' => 'form-control select2', 'placeholder' => 'Select a page or leave blank (#)']) }}--}}
-                        <select class="form-control select2" name="page">
+                        <label class="page pb-2">Page</label>
+                        <select class="form-control select2 mt-2" name="page">
                             <option value ="">Select a page or leave blank (#)</option>
                             @foreach($pages as $page)
                                 <option value="{{$page->slug}}">{{$page->title}}</option>
                             @endforeach
                         </select>
-                        <label class="page">Page</label>
                     </div>
                     <div class="form-group">
-                        {{ Form::text('name', old('name'), ['class' => 'form-control', 'required', 'placeholder' => '(same as page title)']) }}
                         <label class="name">Name</label>
+                        {{ Form::text('name', old('name'), ['class' => 'form-control', 'required', 'placeholder' => '(same as page title)']) }}
                     </div>
 
                     <div class="form-group">
-                        {{ Form::text('custom_url', old('custom_url'), ['class' => 'form-control', 'placeholder' => '(enter your custom URL here..)']) }}
                         <label class="name">Custom URL</label>
+                        {{ Form::text('custom_url', old('custom_url'), ['class' => 'form-control', 'placeholder' => '(enter your custom URL here..)']) }}
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -204,12 +205,9 @@
     </div>
 @stop
 
-@push('scripts')
-    <script src="{{ asset('backend/assets/js/libs/jquery-validation/dist/jquery.validate.min.js') }}"></script>
-    <script src="{{ asset('backend/assets/js/libs/jquery-validation/dist/additional-methods.min.js') }}"></script>
-    <script src="{{ asset('backend/assets/js/libs/nestable/jquery.nestable.js') }}"></script>
-    <script src="{{ asset('backend/assets/js/libs/bootbox/bootbox.min.js') }}"></script>
-    <script src="{{ asset('backend/assets/js/libs/select2/select2.min.js') }}"></script>
+@section('page-specific-scripts')
+    <script src="{{ asset('js/nestable.js') }}"></script>
+    <script src="{{ asset('js/bootbox.js') }}"></script>
     <script>
         $(document).ready(function () {
             $('.nestable-list').nestable();
@@ -277,4 +275,4 @@
             });
         });
     </script>
-@endpush
+@endsection

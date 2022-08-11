@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Menu;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Menu\MenuRequest;
 use App\Modules\Models\Menu\Menu;
+use App\Modules\Models\Menu\SubMenu;
 use App\Modules\Models\Page\Page;
 use Illuminate\Http\Request;
 

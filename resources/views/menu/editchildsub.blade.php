@@ -52,12 +52,12 @@
 </section>
 @stop
 
-@push('styles')
+@section('page-specific-styles')
     <link href="{{ asset('backend/css/libs/dropify/dropify.min.css') }}" rel="stylesheet">
-@endpush
+@endsection
 
-@push('scripts')
+@section('page-specific-scripts')
     <script src="{{ asset('backend/js/libs/jquery-validation/dist/jquery.validate.min.js') }}"></script>
     <script src="{{ asset('backend/js/libs/jquery-validation/dist/additional-methods.min.js') }}"></script>
     <script src="{{ asset('backend/js/libs/dropify/dropify.min.js') }}"></script>
-@endpush
+@endsection
