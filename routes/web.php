@@ -118,4 +118,64 @@ Route::group(['middleware' => 'auth', 'namespace' => 'App\Http\Controllers'], fu
             });
         });
     });
+
+    Route::group(['as' => 'about.', 'prefix' => 'about'], function () {
+        Route::get('', 'About\AboutController@index')->name('index');
+        Route::get('create', 'About\AboutController@create')->name('create');
+        Route::post('', 'About\AboutController@store')->name('store');
+        Route::put('{about}', 'About\AboutController@update')->name('update');
+        Route::get('{about}/edit', 'About\AboutController@edit')->name('edit');
+        Route::get('{about}', 'About\AboutController@destroy')->name('destroy');
+    });
+
+    Route::group(['as' => 'slider.', 'prefix' => 'slider'], function () {
+        Route::get('', 'Slider\SliderController@index')->name('index');
+        Route::get('create', 'Slider\SliderController@create')->name('create');
+        Route::post('', 'Slider\SliderController@store')->name('store');
+        Route::put('{slider}', 'Slider\SliderController@update')->name('update');
+        Route::get('{slider}/edit', 'Slider\SliderController@edit')->name('edit');
+        Route::get('{slider}', 'Slider\SliderController@destroy')->name('destroy');
+    });
+
+    Route::group(['as' => 'blog.', 'prefix' => 'blog'], function () {
+        Route::get('', 'Blog\BlogController@index')->name('index');
+        Route::get('create', 'Blog\BlogController@create')->name('create');
+        Route::post('', 'Blog\BlogController@store')->name('store');
+        Route::put('{blog}', 'Blog\BlogController@update')->name('update');
+        Route::get('{blog}/edit', 'Blog\BlogController@edit')->name('edit');
+        Route::get('{blog}', 'Blog\BlogController@destroy')->name('destroy');
+    });
+
+      /*
+    |--------------------------------------------------------------------------
+    |  Album Controller
+    |--------------------------------------------------------------------------
+    */
+    Route::group(['as' => 'album.', 'prefix' => 'album'], function () {
+        Route::get('', 'Album\AlbumController@index')->name('index');
+        Route::get('create', 'Album\AlbumController@create')->name('create');
+        Route::post('', 'Album\AlbumController@store')->name('store');
+        Route::put('{album}', 'Album\AlbumController@update')->name('update');
+        Route::get('{album}/edit', 'Album\AlbumController@edit')->name('edit');
+        Route::get('{album}', 'Album\AlbumController@destroy')->name('destroy');
+    });
+
+    Route::group(['as' => 'gallery.', 'prefix' => 'gallery'], function () {
+        Route::get('', 'Gallery\GalleryController@index')->name('index');
+        Route::get('create', 'Gallery\GalleryController@create')->name('create');
+        Route::post('', 'Gallery\GalleryController@store')->name('store');
+        Route::put('{gallery}', 'Gallery\GalleryController@update')->name('update');
+        Route::get('{gallery}/edit', 'Gallery\GalleryController@edit')->name('edit');
+        Route::get('{gallery}', 'Gallery\GalleryController@destroy')->name('destroy');
+    });
+
+    Route::group(['as' => 'news.', 'prefix' => 'news'], function () {
+        Route::get('', 'News\NewsController@index')->name('index');
+        Route::get('create', 'News\NewsController@create')->name('create');
+        Route::post('', 'News\NewsController@store')->name('store');
+        Route::put('{news}', 'News\NewsController@update')->name('update');
+        Route::get('{news}/edit', 'News\NewsController@edit')->name('edit');
+        Route::get('{news}', 'News\NewsController@destroy')->name('destroy');
+    });
+
 });

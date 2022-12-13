@@ -35,6 +35,21 @@
         <script src="{{asset('js/jquery.repeater.min.js')}}"></script>
 
         <script src="{{asset('js/form-repeater.init.js')}}"></script>
+        <script src="//cdn.ckeditor.com/4.14.1/full/ckeditor.js"></script>
+        <script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
+        <script>
+			$(function () {
+				$('.ckeditor').each(function (e) {
+				});
+			});
+		</script>
+
+        <script type="text/javascript">
+
+            $('.lfm').filemanager('image');
+
+        </script>
+
 
         {{-- <script>
             $(function () {
